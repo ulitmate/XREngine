@@ -12,6 +12,7 @@ RUN npm install -g lerna cross-env rimraf ts-eager --loglevel notice
 COPY package.json .
 COPY packages/common/package.json ./packages/common/
 COPY packages/engine/package.json ./packages/engine/
+COPY packages/gameserver/package.json ./packages/gameserver/
 COPY packages/projects/package.json ./packages/projects/
 COPY packages/server-core/package.json ./packages/server-core/
 
@@ -23,4 +24,4 @@ COPY . .
 
 ENV APP_ENV=production
 
-CMD ["scripts/run-builder.sh"]
+CMD ["scripts/start-server.sh"]
