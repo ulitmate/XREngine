@@ -22,4 +22,4 @@ cp packages/projects/default-project/package.json ./project-package-jsons/projec
 find packages/projects/projects/ -name package.json -exec bash -c 'mkdir -p ./project-package-jsons/$(dirname $1) && cp $1 ./project-package-jsons/$(dirname $1)' - '{}' \;
 
 cd dockerfiles
-COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 LABEL=$LABEL docker-compose build
+COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 LABEL=$LABEL docker-compose build --parallel
