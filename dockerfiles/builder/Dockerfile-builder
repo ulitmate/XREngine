@@ -23,4 +23,4 @@ COPY . .
 
 ENV APP_ENV=production
 
-CMD ["scripts/run-client-builder.sh"]
+CMD ["scripts/run-builder.sh"]
