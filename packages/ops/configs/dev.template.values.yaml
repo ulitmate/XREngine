@@ -1,10 +1,10 @@
 client:
   config:
     publicRuntimeConfig:
-      apiServer: https://api-dev.<domain>
-      appServer: https://dev.<domain>
-      gameserver: https://gameserver-dev.<domain>
-      gameserverDomain: gameserver-dev.<domain>
+      apiServer: https://api-dev.rdlxr.com
+      appServer: https://dev.rdlxr.com
+      gameserver: https://gameserver-dev.rdlxr.com
+      gameserverDomain: gameserver-dev.rdlxr.com
       dev: true
       gaMeasurementId: '<GOOGLE_ANALYTICS_MEASUREMENT_ID>'
       feathersStoreKey: TheOverlay-Auth-Store
@@ -39,33 +39,33 @@ client:
     API_RESOLVE_MEDIA_ROUTE: /resolve-media
     API_PROJECT_PUBLISH_ACTION: /publish-project
     API_SCENES_ROUTE: /collection
-    API_SERVER_ADDRESS: api-dev.<domain>
+    API_SERVER_ADDRESS: api-dev.rdlxr.com
     API_SOCKET_ENDPOINT: /socket
-    API_SERVER: https://api-dev.<domain>
+    API_SERVER: https://api-dev.rdlxr.com
     APP_ENV: production
-    CLIENT_ADDRESS: https://dev.<domain>
+    CLIENT_ADDRESS: https://dev.rdlxr.com
     CLIENT_ENABLED: "true"
     CLIENT_SCENE_ROUTE: /scenes/
     CLIENT_LOCAL_SCENE_ROUTE: "/scene.html?scene_id="
-    CORS_PROXY_SERVER: https://api-dev.<domain>
-    HOST_IP: https://api-dev.<domain>
+    CORS_PROXY_SERVER: https://api-dev.rdlxr.com
+    HOST_IP: https://api-dev.rdlxr.com
     HOST_PORT: "3000"
     GITHUB_ORG: xrengine
     GITHUB_REPO: spoke
     IS_MOZ: "false"
-    NEXT_PUBLIC_API_SERVER: https://api-dev.<domain>
+    NEXT_PUBLIC_API_SERVER: https://api-dev.rdlxr.com
     NODE_ENV: production
-    NON_CORS_PROXY_DOMAINS: "reticulum.io,<domain>,amazonaws.com"
+    NON_CORS_PROXY_DOMAINS: "reticulum.io,rdlxr.com,amazonaws.com"
     ROUTER_BASE_PATH: /spoke
     SERVER_ENABLED: "false"
     SITE_DESC: Connected Worlds for Everyone
     SITE_TITLE: TheOverlay
     THUMBNAIL_ROUTE: /thumbnail/
-    THUMBNAIL_SERVER: https://api-dev.<domain>
+    THUMBNAIL_SERVER: https://api-dev.rdlxr.com
     USE_DIRECT_UPLOAD_API: "true"
     USE_HTTPS: "true"
   image:
-    repository: <repository_name>
+    repository: 283786857250.dkr.ecr.eu-west-2.amazonaws.com/xrengine-dev
     pullPolicy: IfNotPresent
   affinity:
     nodeAffinity:
@@ -75,26 +75,26 @@ client:
               - key: eks.amazonaws.com/nodegroup
                 operator: In
                 values:
-                  - ng-1
+                  - XREngineNodeGroup
   ingress:
     annotations:
       kubernetes.io/ingress.class: nginx
       nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
     hosts:
-      - host: dev.<domain>
+      - host: dev.rdlxr.com
         paths:
           - /
   replicaCount: 1
   service:
     type: NodePort
-domain: <domain>
+domain: rdlxr.com
 mariadb:
   db:
-    name: <db_name>
-    password: <password>
-    user: <username>
+    name: xrengine
+    password: password
+    user: admin
   enabled: false
-  externalHost: <RDS hostname>
+  externalHost: xrengine-instance-1.ch9hdiax2wxa.eu-west-2.rds.amazonaws.com
 rts:
   extraEnv:
     NAF_LISTEN_PORT: "8081"
@@ -102,65 +102,65 @@ api:
   config:
     aws:
       keys:
-        access_key_id: <S3_USER_ACCESS_KEY>
-        secret_access_key: <S3_USER_SECRET_KEY>
+        access_key_id: <AWS_ACCESS_KEY>
+        secret_access_key: <AWS_SECRET_KEY>
       s3:
-        region: us-east-1
-        static_resource_bucket: <S3_STATIC_RESOURCES_BUCKET_NAME>
+        region: eu-west-2
+        static_resource_bucket: xrengine-static-resources-dev
       cloudfront:
-        domain: resources.<domain>
+        domain: resources.rdlxr.com
       sns:
-        access_key_id: <SNS_USER_ACCESS_KEY>
+        access_key_id: <AWS_ACCESS_KEY>
         application_id: <AWS_SNS_APPLICATION_ID>
-        region: us-east-1
-        secret_access_key: <SNS_USER_ACCESS_KEY>
+        region: eu-west-2
+        secret_access_key: <AWS_ACCESS_KEY>
         sender_id: <AWS_SNS_SENDER_ID>
-    host: https://dev.<domain>/
+    host: https://dev.rdlxr.com/
   extraEnv:
     APP_ENV: production
-    APP_HOST: dev.<domain>
-    APP_URL: https://dev.<domain>
+    APP_HOST: dev.rdlxr.com
+    APP_URL: https://dev.rdlxr.com
     AUTH_SECRET: <INSERT_A_UUID_OR_SOMETHING_SIMILAR>
-    AWS_SMS_ACCESS_KEY_ID: <SNS_USER_ACCESS_KEY>
-    AWS_SMS_REGION: us-east-1
-    AWS_SMS_SECRET_ACCESS_KEY: <SNS_USER_ACCESS_KEY>
-    AWS_SMS_TOPIC_ARN: <SNS_TOPIC_ARN>
+    AWS_SMS_ACCESS_KEY_ID: <AWS_ACCESS_KEY>
+    AWS_SMS_REGION: eu-west-2
+    AWS_SMS_SECRET_ACCESS_KEY: <AWS_ACCESS_KEY>
+    AWS_SMS_TOPIC_ARN: arn:aws:sns:eu-west-2:283786857250:xrengine
     CLIENT_ENABLED: "false"
     CERT: certs/cert.pem
     KEY: certs/key.pem
-    FACEBOOK_CALLBACK_URL: https://dev.<domain>/auth/oauth/facebook
+    FACEBOOK_CALLBACK_URL: https://dev.rdlxr.com/auth/oauth/facebook
     FACEBOOK_CLIENT_ID: "<FB_OAUTH_CLIENT_ID>"
     FACEBOOK_CLIENT_SECRET: "<FB_OAUTH_SECRET>"
     FORCE_DB_REFRESH: "false"
-    GAMESERVER_DOMAIN: gameserver-dev.<domain>
-    GITHUB_CALLBACK_URL: https://dev.<domain>/auth/oauth/github
+    GAMESERVER_DOMAIN: gameserver-dev.rdlxr.com
+    GITHUB_CALLBACK_URL: https://dev.rdlxr.com/auth/oauth/github
     GITHUB_CLIENT_ID: "<GITHUB_OAUTH_CLIENT_ID>"
     GITHUB_CLIENT_SECRET: "<GITHUB_OAUTH_SECRET>"
-    GOOGLE_CALLBACK_URL: https://dev.<domain>/auth/oauth/google
+    GOOGLE_CALLBACK_URL: https://dev.rdlxr.com/auth/oauth/google
     GOOGLE_CLIENT_ID: "<GOOGLE_OAUTH_CLIENT_ID>"
     GOOGLE_CLIENT_SECRET: "<GOOGLE_OAUTH_SECRET>"
     LINKEDIN_CALLBACK_URL: https://dev.theoverlay.io/auth/oauth/linkedin
     LINKEDIN_CLIENT_ID: "<LINKEDIN_OAUTH_CLIENT_ID"
     LINKEDIN_CIENT_SECRET: "<LINKEDIN_OAUTH_CLIENT_SECRET>"
     MAGICLINK_EMAIL_SUBJECT: Login to TheOverlay
-    MAIL_FROM: info@login.<domain>
+    MAIL_FROM: info@login.rdlxr.com
     SERVER_ENABLED: "true"
-    SERVER_HOST: "api-dev.<domain>"
+    SERVER_HOST: "api-dev.rdlxr.com"
     SERVER_PORT: "3030"
-    SMTP_FROM_EMAIL: info@login.<domain>
+    SMTP_FROM_EMAIL: info@login.rdlxr.com
     SMTP_FROM_NAME: noreply
-    SMTP_HOST: email-smtp.<SES_REGION>.amazonaws.com
-    SMTP_PASS: <AWS_SMTP_PASSWORD>
+    SMTP_HOST: email-smtp.eu-west-2.amazonaws.com
+    SMTP_PASS: BEY2HmewCFXOD7EF0cjFzvBixPWnyWE43doA6YZOwJji
     SMTP_PORT: "465"
     SMTP_SECURE: "true"
-    SMTP_USER: <AWS_SMTP_USER_ID>
+    SMTP_USER: AKIAUEEYDZMRFNC4FYTC
     STORAGE_PROVIDER: aws
-    STORAGE_AWS_ACCESS_KEY_ID: <S3_USER_ACCESS_KEY>
-    STORAGE_AWS_ACCESS_KEY_SECRET: <S3_USER_SECRET>
-    STORAGE_CLOUDFRONT_DOMAIN: resources.<domain>
-    STORAGE_CLOUDFRONT_DISTRIBUTION_ID: <cloudfront_distribution_id>
-    STORAGE_S3_REGION: us-east-1
-    STORAGE_S3_STATIC_RESOURCE_BUCKET: <S3_STATIC_RESOURCES_BUCKET_NAME>
+    STORAGE_AWS_ACCESS_KEY_ID: <AWS_ACCESS_KEY>
+    STORAGE_AWS_ACCESS_KEY_SECRET: <AWS_SECRET_KEY>
+    STORAGE_CLOUDFRONT_DOMAIN: resources.rdlxr.com
+    STORAGE_CLOUDFRONT_DISTRIBUTION_ID: E3OX25EL0GBWWY
+    STORAGE_S3_REGION: eu-west-2
+    STORAGE_S3_STATIC_RESOURCE_BUCKET: xrengine-static-resources-dev
     STORAGE_S3_AVATAR_DIRECTORY: avatars
     TWITTER_CALLBACK_URL: https://dev.theoverlay.io/auth/oauth/linkedin
     TWITTER_CLIENT_ID: "<TWITTER_OAUTH_CLIENT_ID>"
@@ -174,7 +174,7 @@ api:
     STORAGE_S3_DEV_MODE: dev
     PRESIGNED_URL_EXPIRATION_DURATION: "3600"
   image:
-    repository: <repository_name>
+    repository: 283786857250.dkr.ecr.eu-west-2.amazonaws.com/xrengine-dev
   service:
     type: NodePort
   affinity:
@@ -185,7 +185,7 @@ api:
               - key: eks.amazonaws.com/nodegroup
                 operator: In
                 values:
-                  - ng-1
+                  - XREngineNodeGroup
   ingress:
     annotations:
       kubernetes.io/ingress.class: nginx
@@ -213,7 +213,7 @@ api:
           proxy_pass $saved_redirect_location;
         }
     hosts:
-      - host: api-dev.<domain>
+      - host: api-dev.rdlxr.com
         paths:
           - /
   replicaCount: 2
@@ -226,59 +226,59 @@ media:
   config:
     aws:
       keys:
-        access_key_id: <IAM_USER_ACCESS_KEY>
-        secret_access_key: <IAM_USER_SECRET_KEY>
+        access_key_id: <AWS_ACCESS_KEY>
+        secret_access_key: <AWS_SECRET_KEY>
       s3:
-        region: us-east-1
-        static_resource_bucket: <static-resources-bucket-name>
+        region: eu-west-2
+        static_resource_bucket: xrengine-static-resources-dev
       cloudfront:
-        domain: resources.<domain>
+        domain: resources.rdlxr.com
       sns:
-        access_key_id: <SNS_USER_ACCESS_KEY>
+        access_key_id: <AWS_ACCESS_KEY>
         application_id: <AWS_SNS_APPLICATION_ID>
-        region: us-east-1
-        secret_access_key: <SNS_USER_ACCESS_KEY>
+        region: eu-west-2
+        secret_access_key: <AWS_ACCESS_KEY>
         sender_id: <AWS_SNS_SENDER_ID>
-    host: https://dev.<domain>/
+    host: https://dev.rdlxr.com/
   extraEnv:
     APP_ENV: production
-    APP_HOST: dev.<domain>
-    APP_URL: https://dev.<domain>
+    APP_HOST: dev.rdlxr.com
+    APP_URL: https://dev.rdlxr.com
     AUTH_SECRET: <INSERT_A_UUID_OR_SOMETHING_SIMILAR>
-    AWS_SMS_ACCESS_KEY_ID: <SNS_USER_ACCESS_KEY>
-    AWS_SMS_REGION: us-east-1
-    AWS_SMS_SECRET_ACCESS_KEY: <SNS_USER_ACCESS_KEY>
-    AWS_SMS_TOPIC_ARN: <SNS_TOPIC_ARN>
-    FACEBOOK_CALLBACK_URL: https://dev.<domain>/auth/oauth/facebook
+    AWS_SMS_ACCESS_KEY_ID: <AWS_ACCESS_KEY>
+    AWS_SMS_REGION: eu-west-2
+    AWS_SMS_SECRET_ACCESS_KEY: <AWS_SECRET_KEY>
+    AWS_SMS_TOPIC_ARN: arn:aws:sns:eu-west-2:283786857250:xrengine
+    FACEBOOK_CALLBACK_URL: https://dev.rdlxr.com/auth/oauth/facebook
     FACEBOOK_CLIENT_ID: "<FB_OAUTH_CLIENT_ID>"
     FACEBOOK_CLIENT_SECRET: "<FB_OAUTH_SECRET>"
     FORCE_DB_REFRESH: "false"
-    GITHUB_CALLBACK_URL: https://dev.<domain>/auth/oauth/github
+    GITHUB_CALLBACK_URL: https://dev.rdlxr.com/auth/oauth/github
     GITHUB_CLIENT_ID: "<GITHUB_OAUTH_CLIENT_ID>"
     GITHUB_CLIENT_SECRET: "<GITHUB_OAUTH_SECRET>"
-    GOOGLE_CALLBACK_URL: https://dev.<domain>/auth/oauth/google
+    GOOGLE_CALLBACK_URL: https://dev.rdlxr.com/auth/oauth/google
     GOOGLE_CLIENT_ID: "<GOOGLE_OAUTH_CLIENT_ID>"
     GOOGLE_CLIENT_SECRET: "<GOOGLE_OAUTH_SECRET>"
     MAGICLINK_EMAIL_SUBJECT: Login to TheOverlay
-    MAIL_FROM: info@login.<domain>
+    MAIL_FROM: info@login.rdlxr.com
     SERVER_ENABLED: "true"
-    SERVER_HOST: "api-dev.<domain>"
-    SMTP_FROM_EMAIL: info@login.<domain>
+    SERVER_HOST: "api-dev.rdlxr.com"
+    SMTP_FROM_EMAIL: info@login.rdlxr.com
     SMTP_FROM_NAME: noreply
-    SMTP_HOST: email-smtp.<SES_REGION>.amazonaws.com
-    SMTP_PASS: <AWS_SMTP_PASSWORD>
+    SMTP_HOST: email-smtp.eu-west-2.amazonaws.com
+    SMTP_PASS: BEY2HmewCFXOD7EF0cjFzvBixPWnyWE43doA6YZOwJji
     SMTP_PORT: "465"
     SMTP_SECURE: "true"
-    SMTP_USER: <AWS_SMTP_USER_ID>
+    SMTP_USER: AKIAUEEYDZMRFNC4FYTC
     STORAGE_PROVIDER: aws
-    STORAGE_AWS_ACCESS_KEY_ID: <S3_USER_ACCESS_KEY>
-    STORAGE_AWS_ACCESS_KEY_SECRET: <S3_USER_SECRET>
-    STORAGE_CLOUDFRONT_DOMAIN: resources.<domain>
-    STORAGE_CLOUDFRONT_DISTRIBUTION_ID: <cloudfront_distribution_id>
-    STORAGE_S3_REGION: us-east-1
-    STORAGE_S3_STATIC_RESOURCE_BUCKET: <S3_STATIC_RESOURCES_BUCKET_NAME>
+    STORAGE_AWS_ACCESS_KEY_ID: <AWS_ACCESS_KEY>
+    STORAGE_AWS_ACCESS_KEY_SECRET: <AWS_SECRET_KEY>
+    STORAGE_CLOUDFRONT_DOMAIN: resources.rdlxr.com
+    STORAGE_CLOUDFRONT_DISTRIBUTION_ID: E3OX25EL0GBWWY
+    STORAGE_S3_REGION: eu-west-2
+    STORAGE_S3_STATIC_RESOURCE_BUCKET: xrengine-static-resources-dev
   image:
-    repository: <repository_name>
+    repository: 283786857250.dkr.ecr.eu-west-2.amazonaws.com/xrengine-dev
   affinity:
     nodeAffinity:
       requiredDuringSchedulingIgnoredDuringExecution:
@@ -287,16 +287,16 @@ media:
               - key: eks.amazonaws.com/nodegroup
                 operator: In
                 values:
-                  - ng-1
+                  - XREngineNodeGroup
   ingress:
     annotations:
       kubernetes.io/ingress.class: nginx
       nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
       nginx.ingress.kubernetes.io/enable-cors: "true"
-      nginx.ingress.kubernetes.io/cors-allow-origin: https://dev.<domain>
+      nginx.ingress.kubernetes.io/cors-allow-origin: https://dev.rdlxr.com
       nginx.ingress.kubernetes.io/proxy-body-size: 256m
     hosts:
-      - host: api-dev.<domain>
+      - host: api-dev.rdlxr.com
         paths:
           - /video
   service:
@@ -304,29 +304,29 @@ media:
 
 gameserver:
   image:
-    repository: <repository_name>
+    repository: 283786857250.dkr.ecr.eu-west-2.amazonaws.com/xrengine-dev
     pullPolicy: IfNotPresent
   extraEnv:
     APP_ENV: production
-    APP_HOST: dev.<domain>
+    APP_HOST: dev.rdlxr.com
     AUTH_SECRET: <SAME_AUTH_SECRET_AS_IN_API>
-    APP_URL: https://dev.<domain>
+    APP_URL: https://dev.rdlxr.com
     GAMESERVER_ENABLED: "true"
-    ROUTE53_ACCESS_KEY_ID: <ROUTE53_USER_ACCESS_KEY>
-    ROUTE53_ACCESS_KEY_SECRET: <ROUTE53_USER_SECRET>
-    ROUTE53_HOSTED_ZONE_ID: <ROUTE53_HOSTED_ZONE_ID>
+    ROUTE53_ACCESS_KEY_ID: <AWS_ACCESS_KEY>
+    ROUTE53_ACCESS_KEY_SECRET: <AWS_SECRET_KEY>
+    ROUTE53_HOSTED_ZONE_ID: Z078118524NWPVD45FKBB
     RTC_START_PORT: "40000"
     RTC_END_PORT: "40099"
     RTC_PORT_BLOCK_SIZE: "100"
-    GAMESERVER_DOMAIN: gameserver-dev.<domain>
+    GAMESERVER_DOMAIN: gameserver-dev.rdlxr.com
     GAMESERVER_PORT: "3031"
     STORAGE_PROVIDER: aws
-    STORAGE_AWS_ACCESS_KEY_ID: <S3_USER_ACCESS_KEY>
-    STORAGE_AWS_ACCESS_KEY_SECRET: <S3_USER_SECRET>
-    STORAGE_CLOUDFRONT_DOMAIN: resources.<domain>
-    STORAGE_CLOUDFRONT_DISTRIBUTION_ID: <cloudfront_distribution_id>
-    STORAGE_S3_REGION: us-east-1
-    STORAGE_S3_STATIC_RESOURCE_BUCKET: <S3_STATIC_RESOURCES_BUCKET_NAME>
+    STORAGE_AWS_ACCESS_KEY_ID: <AWS_ACCESS_KEY>
+    STORAGE_AWS_ACCESS_KEY_SECRET: <AWS_SECRET_KEY>
+    STORAGE_CLOUDFRONT_DOMAIN: resources.rdlxr.com
+    STORAGE_CLOUDFRONT_DISTRIBUTION_ID: E3OX25EL0GBWWY
+    STORAGE_S3_REGION: eu-west-2
+    STORAGE_S3_STATIC_RESOURCE_BUCKET: xrengine-static-resources-dev
     CERT: certs/cert.pem
     KEY: certs/key.pem
   ingress:
@@ -347,7 +347,7 @@ gameserver:
           proxy_set_header Connection "Upgrade";
           proxy_pass http://$1:$2/socket.io/?$args;
         }
-    host: gameserver-dev.<domain>
+    host: gameserver-dev.rdlxr.com
   resources:
     limits:
       cpu: "2"
@@ -370,13 +370,13 @@ gameserver:
 editor:
   enabled: false
   extraEnv:
-    BASE_ASSETS_PATH: https://api-dev.<domain>/
+    BASE_ASSETS_PATH: https://api-dev.rdlxr.com/
     CORS_PROXY_SERVER: ""
     GA_TRACKING_ID: ""
-    HUBS_SERVER: api-dev.<domain>
+    HUBS_SERVER: api-dev.rdlxr.com
     IS_MOZ: "false"
     NON_CORS_PROXY_DOMAINS: ""
-    RETICULUM_SERVER: api-dev.<domain>
+    RETICULUM_SERVER: api-dev.rdlxr.com
     SENTRY_DSN: ""
     THUMBNAIL_SERVER: ""
   affinity:
@@ -387,10 +387,10 @@ editor:
               - key: eks.amazonaws.com/nodegroup
                 operator: In
                 values:
-                  - ng-1
+                  - XREngineNodeGroup
   ingress:
     hosts:
-      - host: dev.<domain>
+      - host: dev.rdlxr.com
         paths:
           - /create
 redis:
@@ -401,15 +401,15 @@ analytics:
   name: xrengine-analytics
   replicaCount: 1
   image:
-    repository: <repository_name>
+    repository: 283786857250.dkr.ecr.eu-west-2.amazonaws.com/xrengine-dev
     pullPolicy: IfNotPresent
   extraEnv:
     ANALYTICS_ENABLED: "true"
     ANALYTICS_PORT: "3030"
     ANALYTICS_PROCESS_INTERVAL: "10000"
     AUTH_SECRET: <SAME_AUTH_SECRET_AS_IN_API>
-    STORAGE_S3_REGION: us-east-1
-    STORAGE_S3_STATIC_RESOURCE_BUCKET: <S3_STATIC_RESOURCES_BUCKET_NAME>
+    STORAGE_S3_REGION: eu-west-2
+    STORAGE_S3_STATIC_RESOURCE_BUCKET: xrengine-static-resources-dev
     STORAGE_S3_AVATAR_DIRECTORY: avatars
 
 
@@ -430,4 +430,4 @@ analytics:
               - key: eks.amazonaws.com/nodegroup
                 operator: In
                 values:
-                  - ng-1
+                  - XREngineNodeGroup
