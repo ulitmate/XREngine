@@ -18,6 +18,8 @@ else
 fi
 
 docker tag $LABEL $ECR_URL/$REPO_NAME-builder:$TAG
+docker tag $LABEL $ECR_URL/$REPO_NAME-builder:latest
 docker tag $LABEL $ECR_URL/$REPO_NAME-builder:latest_$STAGE
 docker push $ECR_URL/$REPO_NAME-builder:$TAG
 docker push $ECR_URL/$REPO_NAME-builder:latest_$STAGE
+docker push $ECR_URL/$REPO_NAME-builder:latest
