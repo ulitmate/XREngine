@@ -25,7 +25,7 @@ builder:
     STORAGE_S3_STATIC_RESOURCE_BUCKET: xrengine-static-resources-dev
     STORAGE_S3_AVATAR_DIRECTORY: avatars
   image:
-    repository: <repo>
+    repository: 283786857250.dkr.ecr.eu-west-2.amazonaws.com/xrengine-dev-builder
   service:
     type: NodePort
   affinity:
